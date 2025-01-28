@@ -1,4 +1,6 @@
-﻿namespace WSConvertisseur.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WSConvertisseur.Models
 {
     public class Devise
     {
@@ -19,6 +21,7 @@
             }
         }
 
+        [Required]
         public string? NomDevise
         {
             get
@@ -49,6 +52,13 @@
         {
         }
 
+        /// <summary>
+        /// Create a single currency.
+        /// </summary>
+        /// <returns>Devise object</returns>
+        /// <param name="id">The id of the currency</param>
+        /// <param name="nomDevise">The name of the currency</param>
+        /// <param name="taux">The rate of the currency</param>
         public Devise(int id, string? nomDevise, double taux)
         {
             this.Id = id;
