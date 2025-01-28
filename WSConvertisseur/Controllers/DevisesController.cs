@@ -24,8 +24,10 @@ namespace WSConvertisseur.Controllers
         /// Get all currency.
         /// </summary>
         /// <returns>List of Devise</returns>
+        /// <response code="200">When the currency id is found</response>
         // GET: api/<DevisesController>
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<Devise> GetAll()
         {
             return devises;
@@ -40,6 +42,8 @@ namespace WSConvertisseur.Controllers
         /// <response code="404">When the currency id is not found</response>
         // GET api/<DevisesController>/5
         [HttpGet("{id}", Name = "GetDevise")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public ActionResult<Devise> GetById(int id)
         {
             Devise? devise =
@@ -54,8 +58,17 @@ namespace WSConvertisseur.Controllers
             return devise;
         }
 
+        /// <summary>
+        /// Post a single currency.
+        /// </summary>
+        /// <returns>Http response</returns>
+        /// <param name="devise">The currency</param>
+        /// <response code="201">When the currency is created</response>
+        /// <response code="400">When the request is bad</response>
         // POST api/<DevisesController>
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public ActionResult<Devise> Post([FromBody] Devise devise)
         {
             if (!ModelState.IsValid) 
@@ -66,8 +79,17 @@ namespace WSConvertisseur.Controllers
             return CreatedAtRoute("GetDevise", new {id =  devise.Id}, devise);
         }
 
+        /// <summary>
+        /// Put a single currency.
+        /// </summary>
+        /// <returns>Http response</returns>
+        /// <param name="id">The id of the currency</param>
+        /// <response code="201">When the currency is created</response>
+        /// <response code="400">When the request is bad</response>
         // PUT api/<DevisesController>/5
         [HttpPut("{id}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public ActionResult Put(int id, [FromBody] Devise devise)
         {
             if (!ModelState.IsValid)
@@ -98,6 +120,8 @@ namespace WSConvertisseur.Controllers
         /// <response code="404">When the currency id is not found</response>
         // DELETE api/<DevisesController>/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public ActionResult<Devise> Delete(int id)
         {
             Devise? devise =
